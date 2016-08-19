@@ -1,2 +1,2 @@
 require './init'
-run Bento::Server.new
+run Server.new
