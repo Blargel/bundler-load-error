@@ -4,20 +4,15 @@ GEM
     rack (1.6.4)
     rake (10.4.2)
     sequel (4.20.0)
-    sinatra (1.2.8)
-      rack (~> 1.1)
-      tilt (>= 1.2.2, < 2.0)
-    tilt (1.3.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (= 1.12.5)
   minitest (~> 5.1)
+  rack
   rake (= 10.4.2)
-  sequel (~> 4.20.0)
-  sinatra (~> 1.2.6)
+  sequel
 
 BUNDLED WITH
    1.12.5

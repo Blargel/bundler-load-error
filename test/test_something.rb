@@ -1,7 +1,6 @@
+require 'minitest'
 require './init'
 
 class TestSomething < Minitest::Test
-  def test_something
-    assert true, "wut"
-  end
+  # Totally a legit test, lol
 end
