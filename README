@@ -1,1 +1,52 @@
-Example for a gem loading bug in Bundler
+Example for a gem loading bug in Bundler.
+It appears to try to load the lib/sequel.rb file as the sequel gem.
+
+To reproduce:
+
+bundle install
+bundle exec rake test
+
+The error:
+
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:89:in `rescue in block (2 levels) in require': There was an error while trying to load the gem 'sequel'. (Bundler::GemRequireError)
+Gem Load Error is: uninitialized constant Sequel
+Backtrace for gem load error is:
+/Users/abnerqian/projects/test/lib/sequel.rb:1:in `<top (required)>'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:86:in `require'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:86:in `block (2 levels) in require'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:81:in `each'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:81:in `block in require'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:70:in `each'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:70:in `require'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler.rb:102:in `require'
+/Users/abnerqian/projects/test/init.rb:2:in `<top (required)>'
+/Users/abnerqian/projects/test/test/test_something.rb:1:in `require'
+/Users/abnerqian/projects/test/test/test_something.rb:1:in `<top (required)>'
+/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:10:in `require'
+/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:10:in `block (2 levels) in <main>'
+/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:9:in `each'
+/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:9:in `block in <main>'
+/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:4:in `select'
+/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:4:in `<main>'
+Bundler Error Backtrace:
+  from /Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:85:in `block (2 levels) in require'
+  from /Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:81:in `each'
+  from /Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:81:in `block in require'
+  from /Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:70:in `each'
+  from /Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler/runtime.rb:70:in `require'
+  from /Users/abnerqian/.rvm/gems/ruby-2.2.2/gems/bundler-1.12.5/lib/bundler.rb:102:in `require'
+  from /Users/abnerqian/projects/test/init.rb:2:in `<top (required)>'
+  from /Users/abnerqian/projects/test/test/test_something.rb:1:in `require'
+  from /Users/abnerqian/projects/test/test/test_something.rb:1:in `<top (required)>'
+  from /Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:10:in `require'
+  from /Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:10:in `block (2 levels) in <main>'
+  from /Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:9:in `each'
+  from /Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:9:in `block in <main>'
+  from /Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:4:in `select'
+  from /Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb:4:in `<main>'
+rake aborted!
+Command failed with status (1): [ruby -I"lib" -I"/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0" "/Users/abnerqian/.rvm/rubies/ruby-2.2.2/lib/ruby/2.2.0/rake/rake_test_loader.rb" "test/test*.rb" ]
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
+/Users/abnerqian/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `<main>'
+Tasks: TOP => test
+(See full trace by running task with --trace)
