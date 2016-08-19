@@ -1,2 +1,3 @@
 require './init'
-run Server.new
+
+run Proc.new { |env| ['200', {'Content-Type' => 'text/html'}, ['hi']] }
